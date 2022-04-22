@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
-import { NgxPaginationModule } from 'ngx-pagination'; // At the top of your module
 
-// @NgModule({
-//   imports: [
-//     CommonModule,
-//     NgxPaginationModule // Add this line of code here
-//   ],
 @Component({
   selector: 'gg-profile',
   templateUrl: './profile.component.html',
@@ -16,13 +10,12 @@ export class ProfileComponent implements OnInit {
   profile:any[];
   repos: any[];
   username:string;
-  page: number=1;
-  totalRepos: number;
+page:number=1;
+totolRepos:number;
   constructor(private profileService: ProfileService) {
 
   }
-  ngOnInit() {
-  }
+
   findProfile(){
   	this.profileService.updateProfile(this.username);
   	this.profileService.getProfileInfo().subscribe(profile => {
@@ -33,10 +26,11 @@ export class ProfileComponent implements OnInit {
   	this.profileService.getProfileRepos().subscribe(repos => {
   		console.log(repos);
   		this.repos = repos;
-      this.totalRepos = this.repos.length;
+      this.totolRepos=repos.length;
   	})
   }
 
-
+  ngOnInit() {
+  }
 
 }
